@@ -1,0 +1,2645 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+
+
+
+<head>
+
+
+
+    <meta charset="UTF-8">
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>PredictIQ | Machine Learning Studio</title>
+
+
+
+
+
+
+
+    <style>
+
+
+
+        :root {
+
+
+
+            --navy: #14213d;
+
+
+
+            --blue: #3563e9;
+
+
+
+            --blue-dark: #254acb;
+
+
+
+            --background: #f4f7fc;
+
+
+
+            --text: #202b40;
+
+
+
+            --muted: #718096;
+
+
+
+            --border: #e0e7f1;
+
+
+
+        }
+
+
+
+
+
+
+
+        * { box-sizing: border-box; }
+
+
+
+
+
+
+
+        body {
+
+
+
+            margin: 0;
+
+
+
+            font-family: "Segoe UI", Arial, sans-serif;
+
+
+
+            background: var(--background);
+
+
+
+            color: var(--text);
+
+
+
+            line-height: 1.6;
+
+
+
+        }
+
+
+
+
+
+
+
+        button, input, select { font: inherit; }
+
+
+
+
+
+
+
+        .navbar {
+
+
+
+            background: white;
+
+
+
+            border-bottom: 1px solid var(--border);
+
+
+
+        }
+
+
+
+
+
+
+
+        .nav-inner {
+
+
+
+            max-width: 1120px;
+
+
+
+            margin: auto;
+
+
+
+            padding: 16px 24px;
+
+
+
+            display: flex;
+
+
+
+            justify-content: space-between;
+
+
+
+            align-items: center;
+
+
+
+            gap: 12px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .brand {
+
+
+
+            display: flex;
+
+
+
+            align-items: center;
+
+
+
+            gap: 12px;
+
+
+
+            color: var(--navy);
+
+
+
+            font-size: 21px;
+
+
+
+            font-weight: 800;
+
+
+
+        }
+
+
+
+
+
+
+
+        .brand-icon {
+
+
+
+            display: grid;
+
+
+
+            place-items: center;
+
+
+
+            width: 42px;
+
+
+
+            height: 42px;
+
+
+
+            border-radius: 12px;
+
+
+
+            background: var(--blue);
+
+
+
+            color: white;
+
+
+
+            font-size: 23px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .status {
+
+
+
+            color: #16835c;
+
+
+
+            font-size: 13px;
+
+
+
+            font-weight: 600;
+
+
+
+        }
+
+
+
+
+
+
+
+        .hero {
+
+
+
+            background: linear-gradient(120deg, #14213d, #234c9b);
+
+
+
+            color: white;
+
+
+
+            padding: 52px 24px 72px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .hero-inner {
+
+
+
+            max-width: 1060px;
+
+
+
+            margin: auto;
+
+
+
+        }
+
+
+
+
+
+
+
+        .eyebrow {
+
+
+
+            color: #a9c2ff;
+
+
+
+            font-size: 12px;
+
+
+
+            letter-spacing: 2px;
+
+
+
+            font-weight: 800;
+
+
+
+            text-transform: uppercase;
+
+
+
+        }
+
+
+
+
+
+
+
+        .hero h1 {
+
+
+
+            max-width: 700px;
+
+
+
+            margin: 12px 0;
+
+
+
+            font-size: clamp(30px, 5vw, 46px);
+
+
+
+            line-height: 1.2;
+
+
+
+        }
+
+
+
+
+
+
+
+        .hero p {
+
+
+
+            max-width: 650px;
+
+
+
+            color: #d8e3f9;
+
+
+
+        }
+
+
+
+
+
+
+
+        .main {
+
+
+
+            max-width: 1060px;
+
+
+
+            margin: -35px auto 0;
+
+
+
+            padding: 0 24px 50px;
+
+
+
+            position: relative;
+
+
+
+        }
+
+
+
+
+
+
+
+        .tabs {
+
+
+
+            display: flex;
+
+
+
+            gap: 8px;
+
+
+
+            padding: 8px;
+
+
+
+            margin-bottom: 22px;
+
+
+
+            background: white;
+
+
+
+            border: 1px solid var(--border);
+
+
+
+            border-radius: 14px;
+
+
+
+            box-shadow: 0 8px 28px #15274a0a;
+
+
+
+        }
+
+
+
+
+
+
+
+        .tab {
+
+
+
+            flex: 1;
+
+
+
+            border: none;
+
+
+
+            background: transparent;
+
+
+
+            padding: 13px;
+
+
+
+            border-radius: 9px;
+
+
+
+            color: var(--muted);
+
+
+
+            cursor: pointer;
+
+
+
+            font-weight: 700;
+
+
+
+        }
+
+
+
+
+
+
+
+        .tab.active {
+
+
+
+            background: #eaf0ff;
+
+
+
+            color: var(--blue);
+
+
+
+        }
+
+
+
+
+
+
+
+        .panel {
+
+
+
+            display: none;
+
+
+
+            background: white;
+
+
+
+            border: 1px solid var(--border);
+
+
+
+            border-radius: 18px;
+
+
+
+            overflow: hidden;
+
+
+
+            box-shadow: 0 14px 40px #15274a0c;
+
+
+
+        }
+
+
+
+
+
+
+
+        .panel.active { display: block; }
+
+
+
+
+
+
+
+        .panel-header {
+
+
+
+            padding: 27px 32px;
+
+
+
+            border-bottom: 1px solid var(--border);
+
+
+
+        }
+
+
+
+
+
+
+
+        .panel-header h2 {
+
+
+
+            margin: 0;
+
+
+
+            font-size: 25px;
+
+
+
+            color: var(--navy);
+
+
+
+        }
+
+
+
+
+
+
+
+        .panel-header p {
+
+
+
+            margin: 6px 0 0;
+
+
+
+            color: var(--muted);
+
+
+
+            font-size: 14px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .form-body { padding: 30px 32px 34px; }
+
+
+
+
+
+
+
+        .section-label {
+
+
+
+            margin: 0 0 18px;
+
+
+
+            font-size: 12px;
+
+
+
+            font-weight: 800;
+
+
+
+            color: var(--blue);
+
+
+
+            text-transform: uppercase;
+
+
+
+            letter-spacing: 1px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .grid {
+
+
+
+            display: grid;
+
+
+
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+
+
+
+            gap: 21px 24px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .field { min-width: 0; }
+
+
+
+
+
+
+
+        label {
+
+
+
+            display: block;
+
+
+
+            margin-bottom: 8px;
+
+
+
+            color: #34415a;
+
+
+
+            font-size: 13px;
+
+
+
+            font-weight: 700;
+
+
+
+        }
+
+
+
+
+
+
+
+        input, select {
+
+
+
+            display: block;
+
+
+
+            width: 100%;
+
+
+
+            min-height: 48px;
+
+
+
+            padding: 11px 13px;
+
+
+
+            color: var(--text);
+
+
+
+            background: #fbfcff;
+
+
+
+            border: 1px solid #d9e1ed;
+
+
+
+            border-radius: 9px;
+
+
+
+            outline: none;
+
+
+
+        }
+
+
+
+
+
+
+
+        input:focus, select:focus {
+
+
+
+            border-color: var(--blue);
+
+
+
+            box-shadow: 0 0 0 3px #3563e91a;
+
+
+
+        }
+
+
+
+
+
+
+
+        .hint {
+
+
+
+            margin: 6px 0 0;
+
+
+
+            color: var(--muted);
+
+
+
+            font-size: 11px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .form-footer {
+
+
+
+            margin-top: 28px;
+
+
+
+            padding-top: 23px;
+
+
+
+            border-top: 1px solid var(--border);
+
+
+
+        }
+
+
+
+
+
+
+
+        .submit-btn {
+
+
+
+            width: 100%;
+
+
+
+            min-height: 51px;
+
+
+
+            padding: 13px 18px;
+
+
+
+            border: none;
+
+
+
+            border-radius: 9px;
+
+
+
+            background: var(--blue);
+
+
+
+            color: white;
+
+
+
+            font-weight: 800;
+
+
+
+            cursor: pointer;
+
+
+
+            transition: background .2s;
+
+
+
+        }
+
+
+
+
+
+
+
+        .submit-btn:hover { background: var(--blue-dark); }
+
+
+
+
+
+
+
+        .submit-btn:disabled {
+
+
+
+            opacity: .65;
+
+
+
+            cursor: wait;
+
+
+
+        }
+
+
+
+
+
+
+
+        .result {
+
+
+
+            display: none;
+
+
+
+            margin-top: 22px;
+
+
+
+            padding: 20px;
+
+
+
+            border: 1px solid #c9d8ff;
+
+
+
+            border-radius: 12px;
+
+
+
+            background: #f0f5ff;
+
+
+
+        }
+
+
+
+
+
+
+
+        .result.show { display: block; }
+
+
+
+
+
+
+
+        .result-label {
+
+
+
+            color: #536582;
+
+
+
+            font-size: 12px;
+
+
+
+            font-weight: 700;
+
+
+
+        }
+
+
+
+
+
+
+
+        .result-value {
+
+
+
+            margin-top: 4px;
+
+
+
+            color: var(--navy);
+
+
+
+            font-size: 27px;
+
+
+
+            font-weight: 800;
+
+
+
+            overflow-wrap: anywhere;
+
+
+
+        }
+
+
+
+
+
+
+
+        .result-note {
+
+
+
+            margin-top: 5px;
+
+
+
+            color: var(--muted);
+
+
+
+            font-size: 12px;
+
+
+
+        }
+
+
+
+
+
+
+
+        .error {
+
+
+
+            background: #fff3f2;
+
+
+
+            border-color: #ffc8c2;
+
+
+
+        }
+
+
+
+
+
+
+
+        .footer {
+
+
+
+            padding: 0 24px 28px;
+
+
+
+            text-align: center;
+
+
+
+            color: var(--muted);
+
+
+
+            font-size: 12px;
+
+
+
+        }
+
+
+
+
+
+
+
+        @media (max-width: 600px) {
+
+
+
+            .hero { padding: 40px 20px 62px; }
+
+
+
+            .main { padding: 0 14px 36px; }
+
+
+
+            .panel-header, .form-body { padding: 22px 19px; }
+
+
+
+            .grid { grid-template-columns: 1fr; gap: 17px; }
+
+
+
+            .tab { padding: 11px 7px; font-size: 12px; }
+
+
+
+            .status { font-size: 11px; }
+
+
+
+        }
+
+
+
+    </style>
+
+
+
+</head>
+
+
+
+
+
+
+
+<body>
+
+
+
+    <nav class="navbar">
+
+
+
+        <div class="nav-inner">
+
+
+
+            <div class="brand">
+
+
+
+                <div class="brand-icon">P</div>
+
+
+
+                PredictIQ
+
+
+
+            </div>
+
+
+
+            <div class="status">● ML Prediction Studio</div>
+
+
+
+        </div>
+
+
+
+    </nav>
+
+
+
+
+
+
+
+    <header class="hero">
+
+
+
+        <div class="hero-inner">
+
+
+
+            <div class="eyebrow">Intelligent predictions</div>
+
+
+
+            <h1>Make smarter decisions with machine learning.</h1>
+
+
+
+            <p>
+
+
+
+                Estimate used-car prices or explore Titanic survival
+
+
+
+                predictions using machine learning. Enter a few details
+
+
+
+                to get started.
+
+
+
+            </p>
+
+
+
+        </div>
+
+
+
+    </header>
+
+
+
+
+
+
+
+    <main class="main">
+
+
+
+        <div class="tabs" role="tablist">
+
+
+
+            <button class="tab active" id="carTab"
+
+
+
+                type="button" role="tab" aria-selected="true">
+
+
+
+                🚘 Car Price
+
+
+
+            </button>
+
+
+
+            <button class="tab" id="titanicTab"
+
+
+
+                type="button" role="tab" aria-selected="false">
+
+
+
+                🚢 Titanic Survival
+
+
+
+            </button>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <!-- Car price prediction -->
+
+
+
+        <section class="panel active" id="carPanel">
+
+
+
+            <div class="panel-header">
+
+
+
+                <h2>Used-car price estimator</h2>
+
+
+
+                <p>Enter the vehicle details to estimate its price.</p>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-body">
+
+
+
+                <p class="section-label">Vehicle information</p>
+
+
+
+
+
+
+
+                <form id="carForm">
+
+
+
+                    <div class="grid">
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="make">Car make</label>
+
+
+
+                            <input id="make" placeholder="e.g. Honda"
+
+
+
+                                required>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="year">Manufacturing year</label>
+
+
+
+                            <input id="year" type="number"
+
+
+
+                                min="1900" max="2100" value="2019" required>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="kilometers">Kilometres driven</label>
+
+
+
+                            <input id="kilometers" type="number"
+
+
+
+                                min="0" step="1" value="50000" required>
+
+
+
+                            <p class="hint">Total distance travelled.</p>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="fuelType">Fuel type</label>
+
+
+
+                            <select id="fuelType" required>
+
+
+
+                                <option value="Petrol">Petrol</option>
+
+
+
+                                <option value="Diesel">Diesel</option>
+
+
+
+                                <option value="CNG">CNG</option>
+
+
+
+                                <option value="LPG">LPG</option>
+
+
+
+                                <option value="Electric">Electric</option>
+
+
+
+                                <option value="Hybrid">Hybrid</option>
+
+
+
+                            </select>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="transmission">Transmission</label>
+
+
+
+                            <select id="transmission" required>
+
+
+
+                                <option value="Manual">Manual</option>
+
+
+
+                                <option value="Automatic">Automatic</option>
+
+
+
+                            </select>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="owner">Previous ownership</label>
+
+
+
+                            <select id="owner" required>
+
+
+
+                                <option value="First">First owner</option>
+
+
+
+                                <option value="Second">Second owner</option>
+
+
+
+                                <option value="Third">Third owner</option>
+
+
+
+                                <option value="Fourth">Fourth owner</option>
+
+
+
+                                <option value="4 or More">4 or more owners</option>
+
+
+
+                                <option value="UnRegistered Car">
+
+
+
+                                    Unregistered car
+
+
+
+                                </option>
+
+
+
+                            </select>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="sellerType">Seller type</label>
+
+
+
+                            <select id="sellerType" required>
+
+
+
+                                <option value="Individual">Individual</option>
+
+
+
+                                <option value="Corporate">Corporate</option>
+
+
+
+                                <option value="Commercial Registration">
+
+
+
+                                    Commercial Registration
+
+
+
+                                </option>
+
+
+
+                            </select>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="form-footer">
+
+
+
+                        <button class="submit-btn" id="carSubmit"
+
+
+
+                            type="submit">
+
+
+
+                            Estimate Price →
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+                </form>
+
+
+
+
+
+
+
+                <div class="result" id="carResult" aria-live="polite">
+
+
+
+                    <div class="result-label">Estimated car price</div>
+
+
+
+                    <div class="result-value" id="carResultValue"></div>
+
+
+
+                    <div class="result-note" id="carResultNote">
+
+
+
+                        This is a model-generated estimate.
+
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </section>
+
+
+
+
+
+
+
+        <!-- Titanic survival prediction -->
+
+
+
+        <section class="panel" id="titanicPanel">
+
+
+
+            <div class="panel-header">
+
+
+
+                <h2>Titanic survival predictor</h2>
+
+
+
+                <p>Enter passenger information to obtain a prediction.</p>
+
+
+
+            </div>
+
+
+
+
+
+
+
+            <div class="form-body">
+
+
+
+                <p class="section-label">Passenger information</p>
+
+
+
+
+
+
+
+                <form id="titanicForm">
+
+
+
+                    <div class="grid">
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="pclass">Passenger class</label>
+
+
+
+                            <select id="pclass">
+
+
+
+                                <option value="1">First class</option>
+
+
+
+                                <option value="2">Second class</option>
+
+
+
+                                <option value="3" selected>Third class</option>
+
+
+
+                            </select>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="sex">Sex</label>
+
+
+
+                            <select id="sex">
+
+
+
+                                <option value="male">Male</option>
+
+
+
+                                <option value="female">Female</option>
+
+
+
+                            </select>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="age">Age</label>
+
+
+
+                            <input id="age" type="number" min="0"
+
+
+
+                                max="120" step="any" value="22" required>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="sibsp">Siblings / spouse aboard</label>
+
+
+
+                            <input id="sibsp" type="number"
+
+
+
+                                min="0" value="1" required>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="parch">Parents / children aboard</label>
+
+
+
+                            <input id="parch" type="number"
+
+
+
+                                min="0" value="0" required>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="fare">Ticket fare</label>
+
+
+
+                            <input id="fare" type="number" min="0"
+
+
+
+                                step="any" value="7.25" required>
+
+
+
+                        </div>
+
+
+
+
+
+
+
+                        <div class="field">
+
+
+
+                            <label for="embarked">Port of embarkation</label>
+
+
+
+                            <select id="embarked">
+
+
+
+                                <option value="S">Southampton</option>
+
+
+
+                                <option value="C">Cherbourg</option>
+
+
+
+                                <option value="Q">Queenstown</option>
+
+
+
+                            </select>
+
+
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+
+
+                    <div class="form-footer">
+
+
+
+                        <button class="submit-btn" id="titanicSubmit"
+
+
+
+                            type="submit">
+
+
+
+                            Predict Survival →
+
+
+
+                        </button>
+
+
+
+                    </div>
+
+
+
+                </form>
+
+
+
+
+
+
+
+                <div class="result" id="titanicResult" aria-live="polite">
+
+
+
+                    <div class="result-label">Model prediction</div>
+
+
+
+                    <div class="result-value" id="titanicResultValue"></div>
+
+
+
+                    <div class="result-note" id="titanicResultNote"></div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </section>
+
+
+
+    </main>
+
+
+
+
+
+
+
+    <footer class="footer">
+
+
+
+        PredictIQ · Machine Learning Demonstration Project
+
+
+
+    </footer>
+
+
+
+
+
+
+
+    <script>
+
+
+
+        // Convert API errors (including FastAPI validation arrays) into readable text.
+
+        function readableError(detail, fallback) {
+
+            if (typeof detail === "string") return detail;
+
+            if (Array.isArray(detail)) {
+
+                return detail.map(item => {
+
+                    if (item && typeof item === "object") {
+
+                        const location = Array.isArray(item.loc) ? item.loc.join(" → ") : "Input";
+
+                        return `${location}: ${item.msg || JSON.stringify(item)}`;
+
+                    }
+
+                    return String(item);
+
+                }).join("; ");
+
+            }
+
+            if (detail && typeof detail === "object") return JSON.stringify(detail);
+
+            return fallback;
+
+        }
+
+
+
+        // Switch between the two prediction forms.
+
+
+
+        const carTab = document.getElementById("carTab");
+
+
+
+        const titanicTab = document.getElementById("titanicTab");
+
+
+
+        const carPanel = document.getElementById("carPanel");
+
+
+
+        const titanicPanel = document.getElementById("titanicPanel");
+
+
+
+
+
+
+
+        function showPanel(showCar) {
+
+
+
+            carTab.classList.toggle("active", showCar);
+
+
+
+            titanicTab.classList.toggle("active", !showCar);
+
+
+
+            carPanel.classList.toggle("active", showCar);
+
+
+
+            titanicPanel.classList.toggle("active", !showCar);
+
+
+
+
+
+
+
+            carTab.setAttribute("aria-selected", String(showCar));
+
+
+
+            titanicTab.setAttribute("aria-selected", String(!showCar));
+
+
+
+        }
+
+
+
+
+
+
+
+        carTab.addEventListener("click", () => showPanel(true));
+
+
+
+        titanicTab.addEventListener("click", () => showPanel(false));
+
+
+
+
+
+
+
+        // Submit car details to the regression endpoint.
+
+
+
+        document.getElementById("carForm").addEventListener(
+
+
+
+            "submit", async function(event) {
+
+
+
+                event.preventDefault();
+
+
+
+
+
+
+
+                const button = document.getElementById("carSubmit");
+
+
+
+                const result = document.getElementById("carResult");
+
+
+
+                const resultValue = document.getElementById("carResultValue");
+
+
+
+                const resultNote = document.getElementById("carResultNote");
+
+
+
+
+
+
+
+                const payload = {
+
+
+
+                    make: document.getElementById("make").value.trim(),
+
+
+
+                    year: Number(document.getElementById("year").value),
+
+
+
+                    kilometers: Number(
+
+
+
+                        document.getElementById("kilometers").value
+
+
+
+                    ),
+
+
+
+                    fuel_type: document.getElementById("fuelType").value,
+
+
+
+                    transmission: document.getElementById("transmission").value,
+
+
+
+                    owner: document.getElementById("owner").value,
+
+
+
+                    seller_type: document.getElementById("sellerType").value
+
+
+
+                };
+
+
+
+
+
+
+
+                button.disabled = true;
+
+
+
+                button.textContent = "Estimating...";
+
+
+
+                result.classList.remove("error");
+
+
+
+                result.classList.add("show");
+
+
+
+                resultValue.textContent = "Please wait";
+
+
+
+                resultNote.textContent = "Sending details to the model...";
+
+
+
+
+
+
+
+                try {
+
+
+
+                    const response = await fetch("/predict/regression", {
+
+
+
+                        method: "POST",
+
+
+
+                        headers: {"Content-Type": "application/json"},
+
+
+
+                        body: JSON.stringify(payload)
+
+
+
+                    });
+
+
+
+
+
+
+
+                    const data = await response.json().catch(() => ({}));
+
+
+
+
+
+
+
+                    if (!response.ok) {
+
+
+
+                        throw new Error(
+
+                            readableError(data.detail, "Could not estimate price.")
+
+                        );
+
+
+
+                    }
+
+
+
+
+
+
+
+                    const predictedPrice = Number(data.predicted_price);
+
+                    if (data.predicted_price === undefined || !Number.isFinite(predictedPrice)) {
+
+                        throw new Error("The API response did not contain a valid predicted_price. Check app.py.");
+
+                    }
+
+                    resultValue.textContent = predictedPrice.toLocaleString(undefined, {
+
+                        maximumFractionDigits: 2
+
+                    });
+
+
+
+
+
+
+
+                    resultNote.textContent =
+
+
+
+                        "Estimated using the price units in your dataset. " +
+
+
+
+                        "Actual market prices may differ.";
+
+
+
+
+
+
+
+                } catch (error) {
+
+
+
+                    result.classList.add("error");
+
+
+
+                    resultValue.textContent = "Prediction unavailable";
+
+
+
+                    resultNote.textContent = error.message;
+
+
+
+                } finally {
+
+
+
+                    button.disabled = false;
+
+
+
+                    button.textContent = "Estimate Price →";
+
+
+
+                }
+
+
+
+            }
+
+
+
+        );
+
+
+
+
+
+
+
+        // Submit passenger details to the classification endpoint.
+
+
+
+        document.getElementById("titanicForm").addEventListener(
+
+
+
+            "submit", async function(event) {
+
+
+
+                event.preventDefault();
+
+
+
+
+
+
+
+                const button = document.getElementById("titanicSubmit");
+
+
+
+                const result = document.getElementById("titanicResult");
+
+
+
+                const resultValue =
+
+
+
+                    document.getElementById("titanicResultValue");
+
+
+
+                const resultNote =
+
+
+
+                    document.getElementById("titanicResultNote");
+
+
+
+
+
+
+
+                const payload = {
+
+
+
+                    Pclass: Number(document.getElementById("pclass").value),
+
+
+
+                    Sex: document.getElementById("sex").value,
+
+
+
+                    Age: Number(document.getElementById("age").value),
+
+
+
+                    SibSp: Number(document.getElementById("sibsp").value),
+
+
+
+                    Parch: Number(document.getElementById("parch").value),
+
+
+
+                    Fare: Number(document.getElementById("fare").value),
+
+
+
+                    Embarked: document.getElementById("embarked").value
+
+
+
+                };
+
+
+
+
+
+
+
+                button.disabled = true;
+
+
+
+                button.textContent = "Predicting...";
+
+
+
+                result.classList.remove("error");
+
+
+
+                result.classList.add("show");
+
+
+
+                resultValue.textContent = "Please wait";
+
+
+
+                resultNote.textContent = "Evaluating passenger details...";
+
+
+
+
+
+
+
+                try {
+
+
+
+                    const response = await fetch(
+
+
+
+                        "/predict/classification", {
+
+
+
+                            method: "POST",
+
+
+
+                            headers: {"Content-Type": "application/json"},
+
+
+
+                            body: JSON.stringify(payload)
+
+
+
+                        }
+
+
+
+                    );
+
+
+
+
+
+
+
+                    const data = await response.json().catch(() => ({}));
+
+
+
+
+
+
+
+                    if (!response.ok) {
+
+
+
+                        throw new Error(
+
+                            readableError(data.detail, "Could not predict survival.")
+
+                        );
+
+
+
+                    }
+
+
+
+
+
+
+
+                    resultValue.textContent = data.result;
+
+
+
+                    resultNote.textContent =
+
+
+
+                        "Model-estimated survival probability: " +
+
+
+
+                        (data.survival_probability * 100).toFixed(1) + "%";
+
+
+
+
+
+
+
+                } catch (error) {
+
+
+
+                    result.classList.add("error");
+
+
+
+                    resultValue.textContent = "Prediction unavailable";
+
+
+
+                    resultNote.textContent = error.message;
+
+
+
+                } finally {
+
+
+
+                    button.disabled = false;
+
+
+
+                    button.textContent = "Predict Survival →";
+
+
+
+                }
+
+
+
+            }
+
+
+
+        );
+
+
+
+    </script>
+
+
+
+</body>
+
+
+
+</html>
